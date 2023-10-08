@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+      
+        let grades = [21, 41, 56, 54, 32, 45, 67, 86, 43, 25, 90, 87,80,60,50]
+        
+        let above80 = []
+        let medium= []
+        let fail= []
+
+        for(let i = 0; i < grades.length; i++){
+            let grade_certain = grades[i]
+
+            if (grade_certain>=80){
+                above80.push(grade_certain);
+            }
+            
+            if (50<=grade_certain&&grade_certain<80){
+                medium.push(grade_certain);
+            }
+
+            if (grade_certain<50){
+                fail.push(grade_certain)
+            }
+        }
+
+        console.log("grade above 80:",above80)
+        console.log("grade medium:", medium)
+        console.log("grade fail:" , fail)
+    </script>
+</body>
+</html>
