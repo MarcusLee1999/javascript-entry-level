@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array deduplication (index iteration)</title>
+</head>
+
+<body>
+    <script>
+        let array_01 = [4, 6, 7, 5, 3, 5, , 7, 5, 4, 6, 7, 4, 2, 5, 7, 8, 4, , 2, 3, 5, 6, 8, 8, 6]
+        function fn_deduplication(certainArray) {
+            for(
+                i=0; i<(certainArray.length);i++
+            )
+            {
+                if(
+                    certainArray.lastIndexOf(certainArray[i])!=i
+                ){
+                    certainArray.splice(i,1)
+                   i--
+                }
+
+            }
+
+
+        }
+
+
+
+        fn_deduplication(array_01)
+
+        console.log(array_01)
+    </script>
+</body>
+
+</html>
