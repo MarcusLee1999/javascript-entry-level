@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{ border: 1px solid; width: 800px; border-collapse:collapse;}
+        td{border: 1px solid; height: 50px; text-align: center;}       
+    </style>
+</head>
+<body>
+
+    <table id="list_01">
+    </table>
+
+    <script>
+        var data = [
+            {name:'john',age:18,salary:3500},
+            {name:'john',age:18,salary:3500},
+            {name:'john',age:18,salary:3500},
+            {name:'john',age:18,salary:3500},
+            {name:'john',age:18,salary:3500},
+        ];
+
+        var element_list_01 = document.getElementById('list_01');
+
+        // 创建表头行
+        var element_line_01 = document.createElement('tr');
+        element_list_01.appendChild(element_line_01);
+
+        // 创建并添加 "id" 列
+        var element_unit_01 = document.createElement('td');
+        element_unit_01.innerText = 'id';
+        element_line_01.appendChild(element_unit_01)
+
+        // 创建其余表头单元格
+        for (var key in data[0]) {
+            var element_unit_02 = document.createElement('td');
+            element_line_01.appendChild(element_unit_02);
+            element_unit_02.innerHTML = key;
+        }
+
+        //追加数据行
+        
+    </script>
+    
+</body>
+</html>
