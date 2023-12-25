@@ -47,9 +47,14 @@
             element_list_01.appendChild(element_line_02);
 
             // 添加ID列
-            var idCell = document.createElement('td');
-            idCell.innerText = i + 1;  // 假设ID是从1开始的序号
-            element_line_02.appendChild(idCell);
+            // var idCell = document.createElement('td');
+            // idCell.innerText = i + 1;  // 假设ID是从1开始的序号
+            // element_line_02.appendChild(idCell);
+
+
+            var idCell=document.createElement('td');
+            idCell.innerText=('000')+(i+1)
+            element_line_02.appendChild(idCell)
 
             // 添加其它数据列
             for(var key in data[i]) {

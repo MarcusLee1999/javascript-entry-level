@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Function Example</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        var button = document.getElementById('myButton');
+
+        // 定义一个函数
+        function showMessage() {
+            alert('Button was clicked!');
+        }
+
+        // 使用函数名来赋值 - 正确的方法
+        // 当按钮被点击时，showMessage 函数将被调用
+       // button.onclick = showMessage;
+
+        // 使用函数调用来赋值 - 不正确的方法（这将立即执行函数）
+         button.onclick = showMessage;
+    </script>
+</body>
+</html>
