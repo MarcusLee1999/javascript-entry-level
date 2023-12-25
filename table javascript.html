@@ -16,11 +16,11 @@
 
     <script>
         var data = [
-            {name:'john',age:18,salary:3500},
-            {name:'john',age:18,salary:3500},
-            {name:'john',age:18,salary:3500},
-            {name:'john',age:18,salary:3500},
-            {name:'john',age:18,salary:3500},
+            {name: 'john', age: 18, salary: 3500},
+            {name: 'john', age: 18, salary: 3500},
+            {name: 'john', age: 18, salary: 3500},
+            {name: 'john', age: 18, salary: 3500},
+            {name: 'john', age: 18, salary: 3500},
         ];
 
         var element_list_01 = document.getElementById('list_01');
@@ -32,7 +32,7 @@
         // 创建并添加 "id" 列
         var element_unit_01 = document.createElement('td');
         element_unit_01.innerText = 'id';
-        element_line_01.appendChild(element_unit_01)
+        element_line_01.appendChild(element_unit_01);
 
         // 创建其余表头单元格
         for (var key in data[0]) {
@@ -41,8 +41,23 @@
             element_unit_02.innerHTML = key;
         }
 
-        //追加数据行
-        
+        // 追加数据行
+        for(var i = 0; i < data.length; i++) {
+            var element_line_02 = document.createElement('tr');
+            element_list_01.appendChild(element_line_02);
+
+            // 添加ID列
+            var idCell = document.createElement('td');
+            idCell.innerText = i + 1;  // 假设ID是从1开始的序号
+            element_line_02.appendChild(idCell);
+
+            // 添加其它数据列
+            for(var key in data[i]) {
+                var element_unit_03 = document.createElement('td');
+                element_unit_03.innerText = data[i][key];
+                element_line_02.appendChild(element_unit_03);
+            }
+        }
     </script>
     
 </body>
