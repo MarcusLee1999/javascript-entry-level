@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id='john'>
+    <div class="passwordStrength"></div>
+    <script>
+
+        //首先，要写的内容是定义数据类型
+        var num1 = /^\d+$/;
+        // 这行代码定义了一个正则表达式对象 num1，用于匹配一个或多个数字。
+
+        // 解析这个正则表达式：
+
+        // ^：表示匹配字符串的开始。
+        // \d：表示匹配任何数字（等价于 [0-9]）。
+        // +：表示匹配前面的字符（这里是数字）一次或多次。
+        // $：表示匹配字符串的结束。
+        // 整个表达式 /^\d+$/ 的意思是，它将匹配一个字符串，这个字符串从头到尾（由 ^ 和 $ 指定）完全由一个或多个数字组成。例如，它将匹配 "123"，但不会匹配 "a123"、"123b" 或 "1a3"。
+
+        // 在 JavaScript 中，这样的正则表达式通常用于验证字符串是否完全由数字构成，例如在表单验证中检查用户输入是否是有效的数字。
+        var noContent = /^$/;
+        var lowcase1 = /^[a-z]+$/;
+        var upcase1 = /^[A-Z]+$/;
+        var mixalpha1 = /^\w+$/; //Some examples of strings that would match this regular expression are "abc123", "HelloWorld", and "user_name". However, it would not match strings like " Hello", "123!", or "abc 123" because they contain either non-word characters or spaces.
+        var spe1 = /^[!@#$%^&*()]+$/ //Examples of strings that would match this regular expression include "!@#$", " " (a string of spaces), and "*&^%". However, it would not match strings like "abc", "123", or "hello_world" because these contain word characters.
+        var allowedContent = /^[A-Za-z\d!@#$%^&*()]+$/;
+        var element1 = document.getElementById('john');
+        var element2 = document.getElementsByClassName('passwordStrength')[0];
+
+
+
+        element2.innerText = ('enter your password.');
+
+        element1.oninput = function () {
+
+
+            var passwordContent = element1.value;
+
+            if (noContent.test(passwordContent)) {
+                element2.innerText = ('enter your password');
+            }
+            else if (allowedContent.test(passwordContent)) {
+
+                if (passwordContent.length < 8) {
+                    element2.innerText = ('less than 8 characters');
+                } else if (num1.test(passwordContent) || lowcase1.test(passwordContent) || upcase1.test(passwordContent)) {
+                    element2.innerText = ('low stength');
+                } else if (mixalpha1.test(passwordContent)) {
+                    element2.innerText = ('medium stength');
+                } else if (spe1.test(passwordContent)) {
+                    element2.innerText = ('medium stength (special character only)');
+                } else {
+                    element2.innerText = ('strong stength');
+                }
+            }
+            else {
+                element2.innerText = ('not valid Characters contained');
+            }
+
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
