@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div style="border: 1px solid black;">
+        <span>username: <input id="enterUsername" style="width: 200px;" type="text"></span>
+        <span id="usernameFormat" style="color:rgb(255, 0, 0);">enter your username.</span>
+        <div style="color:blue;">your username must only be english alphabets and numbers, and the first letter must be
+            character.</div>
+
+    </div>
+    <div style="border: 1px solid black; margin-top: 10px;">
+        <div>password: <span><input type="password" id="enterPassword" style="width: 200px;" type="text"></span>
+            <img id="toggleButton" src="eye_close.png" alt="" style="width: 20px; height: 20px; margin-left: -31px; margin-bottom: -5px;">
+            <span id="passwordStrength" style="color:rgb(255, 0, 0); margin-left: 20px;">enter your password.</span>
+        </div>
+        
+        <div style="color:blue;">your username must be at least 8 units.</div>
+    </div>
+    <div style="border: 1px solid black; margin-top: 10px;">
+        <div>confirm your passwords: <input type="password" id="confirmPassword" style="width: 200px;" type="text">
+            <img id="toggleButton2" src="eye_close.png" alt="" style="width: 20px; height: 20px; margin-left: -31px; margin-bottom: -5px;">
+            <span id="confirmPasswordFormat" style="color:rgb(255, 0, 0); margin-left: 20px;">enter your password again.</span>
+        </div>
+        <div style="color:blue;">please check your password, it must be same with the former one.</div>
+    </div>
+    <button id="registerButton">
+        register
+    </button>
+    <div id="registrationResult" style="color: brown;">here shows the result of register</div>
+
+    <script>
+
+        //首先，要写的内容是定义数据类型
+        var num1 = /^\d+$/;
+        var noContent = /^$/;
+        var lowcase1 = /^[a-z]+$/;
+        var upcase1 = /^[A-Z]+$/;
+        var mixalpha1 = /^\w+$/;
+        var spe1 = /^[!@#$%^&*()]+$/
+        var allowedContent = /^[A-Za-z\d!@#$%^&*()]+$/;
+        var usernamePattern = /^[A-Za-z][\w]*$/;
+        var wrongUsername1 = /^[\d][A-Za-z\d!@#$%^&*()]*$/;
+        var wrongUsername2 = /^[_][A-Za-z\d!@#$%^&*()]*$/
+
+
+
+
+        var element_enterUsername = document.getElementById('enterUsername');
+        var element_usernameFormat = document.getElementById('usernameFormat');
+        element_enterUsername.onblur = function () {
+            var usernameContent = element_enterUsername.value;
+
+            if (noContent.test(usernameContent)) {
+                element_usernameFormat.innerText = ('enter your username');
+                element_usernameFormat.style.color = 'red';
+            }
+            else if (usernamePattern.test(usernameContent)) {
+
+                if (usernameContent.length < 6) {
+                    element_usernameFormat.innerText = ('less than 6 characters');
+                    element_usernameFormat.style.color = 'red';
+                }
+                else {
+                    element_usernameFormat.innerText = ('good username');
+                    element_usernameFormat.style.color = 'green';
+                }
+            }
+            else {
+                if (wrongUsername1.test(usernameContent)) {
+                    element_usernameFormat.innerText = ('first letter counldnt be number');
+                    element_usernameFormat.style.color = 'red';
+                }
+                else if (wrongUsername2.test(usernameContent)) {
+                    element_usernameFormat.innerText = ('first leter counldnt be _')
+                    element_usernameFormat.style.color = 'red';
+                }
+                else {
+                    element_usernameFormat.innerText = ('not valid Characters contained');
+                    element_usernameFormat.style.color = 'red';
+                }
+            }
+        }
+
+
+        var element_enterPassword = document.getElementById('enterPassword');
+        var element_passwordStrength = document.getElementById('passwordStrength');
+        element_enterPassword.onblur = function () {
+            var passwordContent = element_enterPassword.value;
+            var confirmPasswordContent = element_confirmPassword.value;
+
+
+            if (allowedContent.test(passwordContent) || passwordContent == '') {
+
+                if (passwordContent.length < 8 && passwordContent !== '') {
+                    element_passwordStrength.innerText = ('less than 8 characters');
+                    element_passwordStrength.style.color = 'red'
+                } else if (num1.test(passwordContent) || lowcase1.test(passwordContent) || upcase1.test(passwordContent)) {
+                    element_passwordStrength.innerText = ('low stength');
+                    element_passwordStrength.style.color= 'brown'
+                } else if (mixalpha1.test(passwordContent)) {
+                    element_passwordStrength.innerText = ('medium stength');
+                    element_passwordStrength.style.color= 'brown'
+                } else if (spe1.test(passwordContent)) {
+                    element_passwordStrength.innerText = ('medium stength (special character only)');
+                    element_passwordStrength.style.color= 'brown'
+                } else if (passwordContent == '') {
+                    element_passwordStrength.innerText = ('enter your password');
+                    element_passwordStrength.style.color = 'red'
+                }
+                else {
+                    element_passwordStrength.innerText = ('strong stength');
+                    element_passwordStrength.style.color='green'
+                }
+            }
+            else {
+                element_passwordStrength.innerText = ('not valid Characters contained');
+                element_passwordStrength.style.color = 'red'
+            }
+
+            var passwordContent = document.getElementById('enterPassword').value;
+            var confirmPasswordContent = element_confirmPassword.value;
+            if (confirmPasswordContent == '') {
+                element_confirmPasswordFormat.innerText = ('enter your password again');
+                element_confirmPasswordFormat.style.color= 'red'
+            }
+            else if (confirmPasswordContent == passwordContent && confirmPasswordContent !== '') {
+                element_confirmPasswordFormat.innerText = ('good, you enter a same password')
+                element_confirmPasswordFormat.style.color = 'green'
+
+            }
+            else if (passwordContent == '' && confirmPasswordContent !== '') {
+                element_passwordStrength.innerText = ('enter your password first')
+                element_confirmPasswordFormat.innerText = ('enter your password first')
+                element_confirmPasswordFormat.style.color= 'red'
+            }
+            else if (passwordContent !== confirmPasswordContent && passwordContent !== '') {
+                element_confirmPasswordFormat.innerText = ('wrong, you enter a different password')
+                element_confirmPasswordFormat.style.color= 'red'
+            }
+            else {
+                element_confirmPasswordFormat.innerText = ('unknown wrong')
+                element_confirmPasswordFormat.style.color= 'red'
+            }
+
+        }
+
+        var element_confirmPassword = document.getElementById('confirmPassword');
+        var element_confirmPasswordFormat = document.getElementById('confirmPasswordFormat');
+
+        element_confirmPassword.onblur = function () {
+            var passwordContent = document.getElementById('enterPassword').value;
+            var confirmPasswordContent = element_confirmPassword.value;
+            if (passwordContent === '' && confirmPasswordContent !== '') {
+                element_confirmPasswordFormat.innerText = ('enter your password first please');
+                element_confirmPasswordFormat.style.color='red'
+            }
+            else if (noContent.test(confirmPasswordContent)) {
+                element_confirmPasswordFormat.innerText = ('enter your password again');
+                element_confirmPasswordFormat.style.color='red'
+            }
+            else if (confirmPasswordContent == passwordContent) {
+                element_confirmPasswordFormat.innerText = ('good, you enter a same password')
+                element_confirmPasswordFormat.style.color ='green'
+
+            }
+
+            else {
+                element_confirmPasswordFormat.innerText = ('wrong, you enter a different password')
+                element_confirmPasswordFormat.style.color='red'
+            }
+        }
+
+
+
+        registerButton.onclick = function () {
+            // 获取输入内容
+            var username = element_enterUsername.value;
+            var password = element_enterPassword.value;
+            var confirmPassword = element_confirmPassword.value;
+
+            // 检查所有条件
+            var isUsernameValid = usernamePattern.test(username) && username.length >= 6;
+            var isPasswordValid = allowedContent.test(password) && password.length >= 8;
+            var isConfirmPasswordValid = confirmPassword === password;
+
+            // 检查条件是否都满足
+            if (isUsernameValid && isPasswordValid && isConfirmPasswordValid) {
+                registrationResult.innerText = 'registration successes';
+                registrationResult.style.color = 'green';
+                alert('registration successes')
+            } else {
+                registrationResult.innerText = 'Conditions not met, registration failed';
+                registrationResult.style.color = 'red';
+                alert('Conditions not met, registration failed')
+            }
+        }
+
+
+        var element_enterPassword = document.getElementById('enterPassword');
+        var element_toggleButton = document.getElementById('toggleButton');
+
+        element_toggleButton.onclick = function () {
+            
+            if (element_toggleButton.src.endsWith('eye_open.png')) {
+                element_toggleButton.src = 'eye_close.png';
+            } else {
+                element_toggleButton.src = 'eye_open.png';
+            }            
+
+
+            if (element_enterPassword.type === 'password') {
+                element_enterPassword.type = 'text';
+            } else {
+                element_enterPassword.type = 'password';
+            }
+        }
+
+
+        var element_confirmPassword = document.getElementById('confirmPassword');
+        var element_toggleButton2 = document.getElementById('toggleButton2');
+
+        element_toggleButton2.onclick = function () {
+            if (element_toggleButton2.src.endsWith('eye_open.png')) {
+                element_toggleButton2.src = 'eye_close.png';
+            } else {
+                element_toggleButton2.src = 'eye_open.png';
+            }   
+
+
+
+            if (element_confirmPassword.type === 'password') {
+                element_confirmPassword.type = 'text';
+            } else {
+                element_confirmPassword.type = 'password';
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>
