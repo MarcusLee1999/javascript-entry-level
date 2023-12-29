@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时计时器</title>
+</head>
+<body>
+    <button id="startButton">发送验证码</button>
+    <div id="timer"></div>
+
+    <script>
+        var startButton = document.getElementById('startButton'); // 获取开始按钮
+        var timerDiv = document.getElementById('timer'); // 获取显示倒计时的元素
+        var interval; // 用于存储计时器的变量
+
+        startButton.onclick = function() {
+            var timeLeft = 5; // 设置倒计时时间
+            timerDiv.innerHTML = timeLeft +'秒后可重新发送验证码'; // 显示倒计时
+            startButton.disabled = true; // 禁用按钮，防止再次点击
+
+            if (interval) {
+                clearInterval(interval); // 如果已有计时器在运行，则先清除
+            }
+
+            interval = setInterval(function() {
+                timeLeft--; // 每秒减少时间
+                timerDiv.innerHTML = timeLeft +'秒后可重新发送验证码'; // 更新显示的时间
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval); // 时间到了，清除计时器
+                    startButton.disabled = false; // 重新启用按钮
+                    timerDiv.innerHTML = ""; // 重置倒计时显示
+                }
+            }, 1000); // 每1000毫秒（1秒）执行一次
+        }
+    </script>
+</body>
+</html>

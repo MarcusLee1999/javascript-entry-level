@@ -1,112 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .tab-container {
-            display: flex; /* 设置为弹性容器 */
-        }
-
-        .tab {
-            margin-right: 10px; /* 为每个标签添加右边距 */
-            border: 1px solid black;
-            background-color: lightgray; /* 浅色背景 */
-        }
-
-        .activeTab{
-            background-color: black; /* 深色背景 */
-            color: white;
-        }
-
-        .NewsContent {
-            width: 500px;
-            height: 500px;
-            background-color: antiquewhite;
-            display: none;
-        }
-    </style>
 </head>
+
 <body>
-    <div class="tab-container">
-        <div class="tab" onclick="showSportsNews(this)">sports news</div>
-        <div class="tab" onclick="showTechnologyNews(this)">technology news</div>
-        <div class="tab" onclick="showMovieNews(this)">movie news</div>
-        <div class="tab" onclick="showEntertainmentNews(this)">entertainment news</div>
-    </div>
 
-    <div id="sportsNews" class="NewsContent">
-        <div>sports news1</div>
-        <div>sports news2</div>
-        <div>sports news3</div>
-        <div>sports news4</div>
-    </div>
-    
-
-    <div id="technologyNews" class="NewsContent">
-        <div>technology news1</div>
-        <div>technology news2</div>
-        <div>technology news3</div>
-        <div>technology news4</div>
-    </div>
-
-    <div id="movieNews" class="NewsContent">
-        <div>movie news1</div>
-        <div>movie news2</div>
-        <div>movie news3</div>
-        <div>movie news4</div>
-    </div>
-
-    <div id="entertainmentNews" class="NewsContent">
-        <div>entertainment news1</div>
-        <div>entertainment news2</div>
-        <div>entertainment news3</div>
-        <div>entertainment news4</div>
-    </div>
-
+    <div id="timer"></div>
 
     <script>
-        function showSportsNews(x0001) {
-            hideAllNews();
-            document.getElementById('sportsNews').style.display = 'block';
-            setActiveTab(x0001);
+        // 设定下课时间为2023年12月29日
+        const endOfClass = new Date('2023-12-29T00:00:00');
+
+        // 为数字添加前导零（如果小于10）
+        function padZero(num) {
+            return num < 10 ? '0' + num : num;
         }
 
-        function showTechnologyNews(x0001) {
-            hideAllNews();
-            document.getElementById('technologyNews').style.display = 'block';
-            setActiveTab(x0001);
-        }
+        // 控制小时、分钟、秒的显示和隐藏
+        let showTimeUnits = true;
 
-        function showMovieNews(x0001) {
-            hideAllNews();
-            document.getElementById('movieNews').style.display = 'block';
-            setActiveTab(x0001);
-        }
+        // 更新时间的函数
+        function updateTime() {
+            // 获取当前时间
+            const now = new Date();
 
-        function showEntertainmentNews(x0001) {
-            hideAllNews();
-            document.getElementById('entertainmentNews').style.display = 'block';
-            setActiveTab(x0001);
-        }
+            // 计算时间差
+            const timeDifference = endOfClass - now;
 
-        function hideAllNews() {
-            document.getElementById('sportsNews').style.display = 'none';
-            document.getElementById('technologyNews').style.display = 'none';
-            document.getElementById('movieNews').style.display = 'none';
-            document.getElementById('entertainmentNews').style.display = 'none';
-        }
-
-
-        function setActiveTab(x0001) {
-            var tabs = document.getElementsByClassName('tab');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('activeTab');
+            // 如果已经过了下课时间
+            if (timeDifference <= 0) {
+                document.getElementById('timer').innerHTML = '下课了！';
+                clearInterval(blinkInterval);
+                return;
             }
-            x0001.classList.add('activeTab');
-        } 
+
+            // 将时间差转换为小时、分钟和秒
+            const hours = padZero(Math.floor(timeDifference / (1000 * 60 * 60)));
+            const minutes = padZero(Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)));
+            const seconds = padZero(Math.floor((timeDifference % (1000 * 60)) / 1000));
+
+            // 构建显示字符串
+            const hoursLabel = showTimeUnits ? ' : ' : '    ';
+            const minutesLabel = showTimeUnits ? ' : ' : '    ';
+
+            document.getElementById('timer').innerHTML = '距离下课还有 ' + hours + ' ' + hoursLabel + ' ' + minutes + ' ' + minutesLabel + ' ' + seconds;
+
+            // 通过requestAnimationFrame再次调用updateTime
+            requestAnimationFrame(updateTime);
+        }
+
+        // 控制显示隐藏的函数
+        function toggleTimeUnits() {
+            showTimeUnits = !showTimeUnits;
+        }
+
+        // 初始调用updateTime函数
+        requestAnimationFrame(updateTime);
+
+        // 每秒调用一次toggleTimeUnits函数来控制显示隐藏
+        const blinkInterval = setInterval(toggleTimeUnits, 1000);
+
     </script>
 
 </body>
+
 </html>
