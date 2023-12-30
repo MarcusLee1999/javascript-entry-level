@@ -1,0 +1,66 @@
+<!DOCTYPE html> <!-- 定义文档类型为 HTML5 -->
+<html lang="en"> <!-- 设置页面的语言为英语 -->
+
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符集为 UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置响应式视图窗口 -->
+    <title>Document</title> <!-- 设置网页标题 -->
+
+    <style>
+        /* CSS样式开始 */
+        #app {
+            text-align: center; /* 设置文本居中 */
+            margin-top: 50px; /* 设置顶部外边距 */
+        }
+
+        button {
+            padding: 10px 20px; /* 设置按钮的内边距 */
+            font-size: 16px; /* 设置字体大小 */
+            cursor: pointer; /* 设置鼠标悬停时的指针样式 */
+        }
+
+        p {
+            margin-top: 20px; /* 设置段落的顶部外边距 */
+            font-size: 18px; /* 设置字体大小 */
+            color: green; /* 设置字体颜色 */
+        }
+        /* CSS样式结束 */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button id="orderButton">下单</button> <!-- 创建一个按钮用于触发下单操作 -->
+        <p id="message"></p> <!-- 创建一个段落用于显示信息 -->
+    </div>
+
+    <script>
+        // JavaScript代码开始
+        let countDownInterval; // 定义一个变量用于存储倒计时的定时器
+
+        // 定义触发下单操作的函数
+        function placeOrder() {
+            clearInterval(countDownInterval); // 清除之前的倒计时定时器
+
+            const messageElement = document.getElementById('message');
+            let countDown = 5; // 设置初始倒计时
+            messageElement.innerText = `请等待 ${countDown} 秒...`; // 显示初始倒计时
+
+            countDownInterval = setInterval(() => {
+                countDown -= 1; // 每次调用减少1秒
+                messageElement.innerText = `请等待 ${countDown} 秒...`;
+
+                if (countDown <= 0) {
+                    clearInterval(countDownInterval); // 清除定时器
+                    messageElement.innerText = '下单成功！';
+                }
+            }, 1000);
+        }
+
+        // 为下单按钮添加点击事件监听器
+        document.getElementById('orderButton').addEventListener('click', placeOrder);
+        // JavaScript代码结束
+    </script>
+</body>
+
+</html>
