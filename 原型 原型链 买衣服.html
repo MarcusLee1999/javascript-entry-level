@@ -1,0 +1,129 @@
+<!DOCTYPE html> <!-- 声明文档类型 -->
+<html lang="en"> <!-- 根元素，指定语言为英语 -->
+
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为 UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 为移动设备设置视口 -->
+    <title>Document</title> <!-- 文档标题 -->
+</head>
+
+<body>
+    <select id="productType"> <!-- 下拉选择框，用于选择产品类型 -->
+        <option value="book1">书籍1</option> <!-- 选项：书籍1 -->
+        <option value="book2">书籍2</option> <!-- 选项：书籍2 -->
+        <option value="book3">书籍3</option> <!-- 选项：书籍3 -->
+        <option value="book4">书籍4</option> <!-- 选项：书籍4 -->
+        <option value="electronic1">电子设备1</option> <!-- 选项：电子设备1 -->
+        <option value="electronic2">电子设备2</option> <!-- 选项：电子设备2 -->
+        <option value="electronic3">电子设备3</option> <!-- 选项：电子设备3 -->
+        <option value="electronic4">电子设备4</option> <!-- 选项：电子设备4 -->
+        <option value="clothing1">衣服1</option> <!-- 选项：衣服1 -->
+        <option value="clothing2">衣服2</option> <!-- 选项：衣服2 -->
+        <option value="clothing3">衣服3</option> <!-- 选项：衣服3 -->
+        <option value="clothing4">衣服4</option> <!-- 选项：衣服4 -->
+    </select>
+    <button id="showDetails">显示详情</button> <!-- 按钮，用于显示产品详情 -->
+
+    <div id="productDetails"></div> <!-- 用于显示产品详情的容器 -->
+
+
+    <script>
+        // 通用产品构造函数
+        function Product(name, price) {
+            this.name = name; // 名称属性
+            this.price = price; // 价格属性
+        }
+
+        Product.prototype.viewDetails = function () {
+            return `${this.name} - Price: $${this.price}`; // 查看产品详情的方法
+        };
+
+        // 书籍构造函数
+        function Book(name, price, author) {
+            Product.call(this, name, price); // 当你在 switch 语句的每个 case 中创建一个新的对象（如 new Book("JavaScript: The Good Parts", 22.99, "Douglas Crockford")），this 在 Book 构造函数的上下文中指向新创建的 Book 实例。
+            this.author = author; // 作者属性
+        }
+
+        Book.prototype = Object.create(Product.prototype); // 尽管 Object.create(Product.prototype) 使用了 Product.prototype，但它创建的是一个与 Product.prototype 完全不同的新对象，这个新对象仅仅是拥有与 Product.prototype 相同的原型链。
+        Book.prototype.constructor = Book;//当你设置 Book.prototype = Object.create(Product.prototype);，你实际上用一个新对象替换了 Book 的原型对象。这个新对象是通过 Object.create 创建的，所以它的 constructor 属性默认指向 Object 而不是 Book。
+        Book.prototype.viewDetails = function () {
+            return `${this.name} by ${this.author} - Price: $${this.price}`; // 查看书籍详情的方法
+        };
+
+        // 电子设备构造函数
+        function Electronic(name, price, model) {
+            Product.call(this, name, price); 
+            this.model = model; // 型号属性
+        }
+
+        Electronic.prototype = Object.create(Product.prototype); // 继承Product原型
+        Electronic.prototype.constructor = Electronic;
+        Electronic.prototype.viewDetails = function () {
+            return `${this.name} (Model: ${this.model}) - Price: $${this.price}`; // 查看电子设备详情的方法
+        };
+
+        // 衣服构造函数
+        function Clothing(name, price, size) {
+            Product.call(this, name, price); // 继承Product
+            this.size = size; // 尺寸属性
+        }
+
+        Clothing.prototype = Object.create(Product.prototype); // 继承Product原型
+        Clothing.prototype.constructor = Clothing;
+        Clothing.prototype.viewDetails = function () {
+            return `${this.name} (Size: ${this.size}) - Price: $${this.price}`; // 查看衣服详情的方法
+        };
+
+        // 添加事件监听器
+        document.getElementById("showDetails").addEventListener("click", function () {
+            var productType = document.getElementById("productType").value; // 获取选中的产品类型
+            var product; // 产品变量
+
+            switch (productType) {
+                // 根据选择创建不同类型的产品实例
+                case "book1":
+                    product = new Book("JavaScript: The Good Parts", 22.99, "Douglas Crockford");
+                    break;
+                case "book2":
+                    product = new Book("Eloquent JavaScript", 25.99, "Marijn Haverbeke");
+                    break;
+                case "book3":
+                    product = new Book("You Don't Know JS", 18.99, "Kyle Simpson");
+                    break;
+                case "book4":
+                    product = new Book("Effective JavaScript", 21.99, "David Herman");
+                    break;
+                case "electronic1":
+                    product = new Electronic("Laptop", 999.99, "Model XYZ");
+                    break;
+                case "electronic2":
+                    product = new Electronic("Smartphone", 599.99, "Model ABC");
+                    break;
+                case "electronic3":
+                    product = new Electronic("Tablet", 399.99, "Model 123");
+                    break;
+                case "electronic4":
+                    product = new Electronic("Smartwatch", 199.99, "Model 789");
+                    break;
+                case "clothing1":
+                    product = new Clothing("T-Shirt", 19.99, "M");
+                    break;
+                case "clothing2":
+                    product = new Clothing("Jeans", 49.99, "L");
+                    break;
+                case "clothing3":
+                    product = new Clothing("Jacket", 89.99, "XL");
+                    break;
+                case "clothing4":
+                    product = new Clothing("Sweater", 39.99, "S");
+                    break;
+                default:
+                    product = new Product("Generic Product", 0); // 默认产品
+            }
+            document.getElementById("productDetails").innerText = product.viewDetails(); // 显示产品详情
+        });
+
+    </script>
+</body>
+
+</html>

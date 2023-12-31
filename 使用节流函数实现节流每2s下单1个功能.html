@@ -46,11 +46,7 @@
                 if (inThrottle) {
                     func();
                     inThrottle = false;
-                    setTimeout(
-                        () => {
-                            inThrottle = true
-                        }
-                        , 2000);
+                    setTimeout(() => inThrottle = true, 2000);
                 }
             }
         }
