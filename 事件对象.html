@@ -1,28 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-        tr{
+        tr {
             border: 1px solid;
         }
 
-        td{
+        td {
             border: 1px solid;
             width: 200px;
             height: 100px;
         }
+
+        .blueSquare{
+            background-color: blue;
+            width: 300px;
+            height: 250px;
+            padding-top: 50px;
+            margin: auto;
+        }
+
+
+        .redSquare{
+            background-color: red;
+            width: 200px;
+            height: 150px;
+            padding-top: 50px;
+            margin: auto;
+        }
+
+
+        .yellowSquare{
+            background-color: yellow;
+            width: 100px;
+            height: 50px;
+            padding-top: 50px;
+            margin: auto;
+        }
     </style>
 
 </head>
+
 <body>
+
+    <div class="blueSquare">
+        <div class="redSquare">
+            <div class="yellowSquare"></div>
+        </div>
+    </div>
+
+
+
     <table>
-        <tr>
+
+
+        <tr id="t">
             <td>
-                <button>BUTTON</button>
+                <button id = 'btn'>BUTTON</button>
             </td>
             <td>
                 1
@@ -35,9 +74,37 @@
 
 
     <script>
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].addEventListener(
+                'click',
+                function (e) {
+                    console.log(e.target)//访问事件源对象
+                    e.target.style.backgroundColor = 'purple'
+                    alert(e.target.className);
+                },
+                true
+            );
+        }
+
+        var btn = document.getElementById('btn')
+        var t = document.getElementById('t')
+        btn.onclick = fn 
+        t.onclick = function (){
+            console.log('t被点击了')
+        }
+
+        function fn(e){
+            console.log('btn被点击了')
+            e.stopPropagation()
+        }
+
+
+
 
     </script>
 
 
 </body>
+
 </html>
