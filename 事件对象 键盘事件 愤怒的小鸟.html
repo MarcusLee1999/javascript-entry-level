@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #bird {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            left: 0; /* 初始位置 */
+            top: 0; /* 初始位置 */
+        }
+    </style>
+</head>
+<body>
+    <div id="bird" tabindex="0"></div> <!-- 添加 tabindex 使其可聚焦 -->
+    <script>
+        var bird = document.getElementById('bird');
+
+        bird.onkeydown = function (e) {
+            var cssStyle = window.getComputedStyle(bird, null);
+            var left = parseInt(cssStyle.left);
+            var top = parseInt(cssStyle.top);
+            //left37 up 38 right 39 down 40
+            if (e.keyCode == 37) {
+                left -= 10; // 向左移动
+                bird.style.left = left + 'px';
+            } else if (e.keyCode == 38) {
+                top -= 10; // 向上移动
+                bird.style.top = top + 'px';
+            } else if (e.keyCode == 39) {
+                left += 10; // 向右移动
+                bird.style.left = left + 'px';
+            } else if (e.keyCode == 40) {
+                top += 10; // 向下移动
+                bird.style.top = top + 'px';
+            }
+        };
+    </script>
+</body>
+</html>
