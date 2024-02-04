@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 筛选按钮 -->
+    <div id="filter-buttons">
+        <button data-filter="jacket">羽绒服</button>
+        <button data-filter="underwear">内衣</button>
+        <button data-filter="pants">裤子</button>
+        <button data-filter="all">所有服装</button>
+    </div>
+
+    <div class="product" data-category="jacket">羽绒服 - 品牌 A</div>
+    <div class="product" data-category="jacket">羽绒服 - 品牌 B</div>
+    <div class="product" data-category="underwear">内衣 - 品牌 C</div>
+    <div class="product" data-category="pants">裤子 - 品牌 D</div>
+
+
+    <script>
+        document.getElementById("filter-buttons").addEventListener("click", function (event) {
+            // 检查点击的是否为按钮
+            if (event.target.tagName === 'BUTTON') {
+                var filter = event.target.getAttribute('data-filter');
+                var products = document.querySelectorAll('.product');
+
+                products.forEach(function (product) {
+                    if (filter === 'all' || product.getAttribute('data-category') === filter) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+    </script>
+
+</body>
+
+
+</html>
