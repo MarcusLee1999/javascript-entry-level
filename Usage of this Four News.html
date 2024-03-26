@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-container {
+            display: flex; /* 设置为弹性容器 */
+        }
+
+        .tab {
+            margin-right: 10px; /* 为每个标签添加右边距 */
+            border: 1px solid black;
+            background-color: lightgray; /* 浅色背景 */
+        }
+
+        .activeTab{
+            background-color: black; /* 深色背景 */
+            color: white;
+        }
+
+        .NewsContent {
+            width: 500px;
+            height: 500px;
+            background-color: antiquewhite;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tab" onclick="showSportsNews(this)">sports news</div>
+        <div class="tab" onclick="showTechnologyNews(this)">technology news</div>
+        <div class="tab" onclick="showMovieNews(this)">movie news</div>
+        <div class="tab" onclick="showEntertainmentNews(this)">entertainment news</div>
+    </div>
+
+    <div id="sportsNews" class="NewsContent">
+        <div>sports news1</div>
+        <div>sports news2</div>
+        <div>sports news3</div>
+        <div>sports news4</div>
+    </div>
+    
+
+    <div id="technologyNews" class="NewsContent">
+        <div>technology news1</div>
+        <div>technology news2</div>
+        <div>technology news3</div>
+        <div>technology news4</div>
+    </div>
+
+    <div id="movieNews" class="NewsContent">
+        <div>movie news1</div>
+        <div>movie news2</div>
+        <div>movie news3</div>
+        <div>movie news4</div>
+    </div>
+
+    <div id="entertainmentNews" class="NewsContent">
+        <div>entertainment news1</div>
+        <div>entertainment news2</div>
+        <div>entertainment news3</div>
+        <div>entertainment news4</div>
+    </div>
+
+
+    <script>
+        function showSportsNews(x0001) {
+            hideAllNews();
+            document.getElementById('sportsNews').style.display = 'block';
+            setActiveTab(x0001);
+        }
+
+        function showTechnologyNews(x0001) {
+            hideAllNews();
+            document.getElementById('technologyNews').style.display = 'block';
+            setActiveTab(x0001);
+        }
+
+        function showMovieNews(x0001) {
+            hideAllNews();
+            document.getElementById('movieNews').style.display = 'block';
+            setActiveTab(x0001);
+        }
+
+        function showEntertainmentNews(x0001) {
+            hideAllNews();
+            document.getElementById('entertainmentNews').style.display = 'block';
+            setActiveTab(x0001);
+        }
+
+        function hideAllNews() {
+            document.getElementById('sportsNews').style.display = 'none';
+            document.getElementById('technologyNews').style.display = 'none';
+            document.getElementById('movieNews').style.display = 'none';
+            document.getElementById('entertainmentNews').style.display = 'none';
+        }
+
+
+        function setActiveTab(x0001) {
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('activeTab');
+            }
+            x0001.classList.add('activeTab');
+        } 
+    </script>
+
+</body>
+</html>

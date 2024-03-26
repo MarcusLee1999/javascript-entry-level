@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM exercise</title>
+    <style>
+        .class01{ height: 200px; background-color: red;}
+        .class02{width: 200px; height: 200px; background-color: yellow;}
+    </style>
+</head>
+<body>
+    
+    <div id= "app" class="class01" >
+        <div class="child">
+            <p>
+                66666666
+            </p>
+        </div>
+
+        <div id="wel" class="title">
+            hello html
+        </div>
+
+        <p class="aa"> html vue</p>
+        <p>
+            html react
+        </p>
+    </div>
+
+    <script id="app">
+        /*
+        DOM 增删改查
+        1 查： 查找元素
+            （1） doc   ument.getElementByID("app");
+                        例子：  var eleObj=document.getElementById("app"); 对象
+            （2） document.getElementsByClassname("class名字"); 数组
+        */
+
+        var app01=document.getElementsByClassName("class01");
+        app01[0].style.width='200px'
+    </script>
+</body>
+</html>

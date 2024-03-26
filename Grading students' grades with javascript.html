@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check grade of students to one sentence</title>
+</head>
+<body>
+    
+
+    <script>
+      
+        let grades = [21,,87, 41, 56,98, 54, 32, 45, 67, 86, 43, 25, 90, 87,22,80,60,50]
+        
+        function fn_checkGrade(){
+            let above80 = []
+            let medium= []
+            let fail= []
+
+            for(let i = 0; i < grades.length; i++){
+                let grade_certain = grades[i]
+
+                if (grade_certain>=80){
+                    above80.push({ studentNumber:i+1 , grade :grade_certain});
+                }
+                
+                if (50<=grade_certain&&grade_certain<80){
+                    medium.push({ studentNumber:i+1 , grade :grade_certain});
+                }
+
+                if (grade_certain<50){
+                    fail.push({ studentNumber:i+1 , grade :grade_certain});
+                }
+            }
+            return {above80, medium,fail}
+        }
+
+        let result = fn_checkGrade()
+
+        let above80GradesArray = result.above80.map(alpha => `the grade of number ${alpha.studentNumber} student:${alpha.grade}`)
+        let mediumGradesArray = result.medium.map(alpha => `the grade of number ${alpha.studentNumber} student:${alpha.grade}`)
+        let failGradesArray = result.fail.map(alpha => `the grade of number ${alpha.studentNumber} student:${alpha.grade}`)
+
+        let above80GradesDescription = `the numbers of above 80 students is ${above80GradesArray.length}`
+                                     +`\n\n here are they: ${above80GradesArray}`
+        let mediumGradesDescription  = `the numbers of medium students is ${mediumGradesArray.length}`
+                                      + `\n \nhere are they: ${mediumGradesArray}`
+        let failGradesDescription  =`the numbers of fail students is ${failGradesArray.length}`
+                                  + ` \n\nhere are they: ${failGradesArray} `
+
+
+        console.log(above80GradesDescription+'\n\n'+mediumGradesDescription+'\n\n'+failGradesDescription)
+    </script>
+</body>
+</html>

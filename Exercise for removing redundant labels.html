@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>age</td>
+            <td>salary</td>
+        </tr>
+    </table>
+    <div id="app" class="title">
+        <div>
+            <div>hello js</div>
+            <div>
+                <div id="pattern_1">
+                    hello vue
+                    <p>123123</p>
+                    <p>123123</p>
+                    <p>123123</p>
+                    <p class="john">45646</p>
+                    <p class="john">45646</p>
+                    <p class="john">45646</p>
+                    <p class="john">45646</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        var element_pattern_1= document.getElementById("pattern_1")
+        var elements_45646 = document.getElementsByClassName("john")
+        var array_elements_45645= Array.from(elements_45646)
+        for(var i = 0; i<array_elements_45645.length; i++){
+            element_pattern_1.removeChild(array_elements_45645[i]);
+        }
+
+    </script>
+    
+</body>
+</html>

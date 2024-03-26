@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button id="orderButton">下单</button>
+        <p id="message"></p>
+    </div>
+
+
+
+
+    <script>
+
+        const messageElement = document.getElementById('message');
+        let n = 0;
+        messageElement.innerText = `下单 ${n} 个`;
+
+        function throttle(func) {
+            let inThrottle = true;
+            return function () {
+                if (inThrottle) {
+                    func();
+                    inThrottle = false;
+                    setTimeout(
+                        () => {
+                            inThrottle = true
+                        }
+                        , 2000);
+                }
+            }
+        }
+
+
+        function placeOrder() {
+            n++; // 增加点击次数
+            messageElement.innerText = `下单 ${n} 个`;
+
+        }
+
+        document.getElementById('orderButton').addEventListener('click', throttle(placeOrder));
+    </script>
+</body>
+
+</html>

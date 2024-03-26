@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .classMovingImage {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            position: absolute;
+        }
+        
+        .classCloseAd{
+            background-color: black;
+            position: absolute;
+            color: white;
+            right: 0; /* 设置右对齐 */
+            top: 0;  /* 如果你想要它在顶部 */
+            padding: 5px; /* 一些内边距，看起来更好 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="movingImage" class="classMovingImage">
+        <div id="closeAd" class="classCloseAd">CLOSE</div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <script>
+        var object01 = document.getElementById('movingImage'); // 获取图片元素\
+        var object02 = document.getElementById('closeAd')
+
+        // 获取窗口的宽度和高度
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+
+        // 设置初始位置
+        var posX = windowWidth - 300; // 减去元素的宽度
+        var posY = windowHeight;
+
+        trueOrFalse= true
+
+        // 将初始位置应用到元素
+        object01.style.left = posX + 'px';
+        object01.style.top = posY + 'px';
+
+        setInterval(function () {
+            if (trueOrFalse  && posY > (windowHeight - 300)) { //posY越大越往下
+                posY -= 1; // 每次调用减少1像素垂直位置
+                object01.style.top = posY + 'px'; // 更新图片的垂直位置
+            }
+            else if(!trueOrFalse && posY < windowHeight ){ 
+                posY += 1; // 每次调用减少1像素垂直位置
+                object01.style.top = posY + 'px'; // 更新图片的垂直位置
+            }
+        }, 1); // 每100毫秒调用一次此函数
+
+        object02.onclick = function () {
+            trueOrFalse = !trueOrFalse
+        }
+
+    </script>
+</body>
+
+</html>

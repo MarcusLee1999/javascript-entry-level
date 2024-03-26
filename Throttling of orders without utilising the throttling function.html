@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button id="orderButton">下单</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let countDownInterval;
+        let isThrottled = false; // 添加节流标志
+
+        function placeOrder() {
+            if (isThrottled) return; // 如果已经在节流状态，直接返回
+
+            isThrottled = true; // 设置节流状态
+            clearInterval(countDownInterval);
+
+            const messageElement = document.getElementById('message');
+            let countDown = 5;
+            messageElement.innerText = `请等待 ${countDown} 秒...`;
+
+            countDownInterval = setInterval(() => {
+                countDown -= 1;
+                messageElement.innerText = `请等待 ${countDown} 秒...`;
+
+                if (countDown <= 0) {
+                    clearInterval(countDownInterval);
+                    messageElement.innerText = '下单成功！';
+                    isThrottled = false; // 重置节流状态
+                }
+            }, 1000);
+        }
+
+        document.getElementById('orderButton').addEventListener('click', placeOrder); //执行代码
+    </script>
+</body>
+</html>

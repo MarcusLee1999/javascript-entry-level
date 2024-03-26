@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>输入下课日期和时间：</div>
+    <input type="date" id="dateInput01">
+    <input type="time" id="timeInput01">
+    <button onclick="setAlarm()">设置闹钟</button>
+
+    <div id="timer001"></div>
+
+    <script>
+        let endOfClass01;
+        let interval001;
+
+        // 为数字添加前导零（如果小于10）
+        function padZero01(x001) {
+            return x001 < 10 ? '0' + x001 : x001;
+        }
+
+        // 控制小时、分钟、秒的显示和隐藏
+        let TrueOrFalse001 = true;
+
+        // 设置闹钟的函数
+        function setAlarm() {
+            const date01 = document.getElementById('dateInput01').value;
+            const time01 = document.getElementById('timeInput01').value;
+            endOfClass01 = new Date(date01 + 'T' + time01);
+
+            if (interval001) {
+                clearInterval(interval001);
+            }
+            interval001 = setInterval(updateTime, 1000);
+            updateTime();
+        }
+
+        // 更新时间的函数
+        function updateTime() {
+            // 获取当前时间
+            const now01 = new Date();
+
+            // 计算时间差
+            const timeDifference01 = endOfClass01 - now01;
+
+            // 如果已经过了下课时间
+            if (timeDifference01 <= 0) {
+                document.getElementById('timer001').innerHTML = '下课了！';
+                alert('下课时间到！');
+                clearInterval(interval001);
+                return;
+            }
+
+            // 将时间差转换为小时、分钟和秒
+            const hours = padZero01(Math.floor(timeDifference01 / (1000 * 60 * 60)));
+            const minutes = padZero01(Math.floor((timeDifference01 % (1000 * 60 * 60)) / (1000 * 60)));
+            const seconds = padZero01(Math.floor((timeDifference01 % (1000 * 60)) / 1000));
+
+            // 构建显示字符串
+            let String_howLong = '距离下课还有 ' + hours;
+            String_howLong += TrueOrFalse001 ? ':' : ' ';
+            String_howLong += minutes;
+            String_howLong += TrueOrFalse001 ? ':' : ' ';
+            String_howLong += seconds;
+
+            // 更新页面上的计时器
+            document.getElementById('timer001').innerHTML = String_howLong;
+
+            // 切换显示状态
+            TrueOrFalse001 = !TrueOrFalse001;
+        }
+
+    </script>
+
+</body>
+
+</html>
