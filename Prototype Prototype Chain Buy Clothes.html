@@ -123,6 +123,18 @@
             document.getElementById("productDetails").innerText = product.viewDetails(); // 显示产品详情
         });
 
+
+        function customNew(constructor, ...args) {
+  // 步骤1: 创建一个空的对象，其原型指向构造函数的prototype
+  const obj = Object.create(constructor.prototype);
+  
+  // 步骤3: 执行构造函数，并将this绑定到新创建的对象上
+  const result = constructor.apply(obj, args);
+  
+  // 步骤4: 确定返回值
+  return result instanceof Object ? result : obj;
+}
+
     </script>
 </body>
 
