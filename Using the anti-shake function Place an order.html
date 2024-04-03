@@ -39,7 +39,7 @@
 
 <body>
     <div id="app">
-        <button id="orderButton">下单</button> <!-- 创建一个按钮用于触发下单操作 -->
+        <button id="orderButton">submit order</button> <!-- 创建一个按钮用于触发下单操作 -->
         <p id="message"></p> <!-- 创建一个段落用于显示信息 -->
     </div>
 
@@ -63,12 +63,12 @@
         function startCountDown() {
             const messageElement = document.getElementById('message');
             let countDown = 5; // 设置初始倒计时
-            messageElement.innerText = `请等待 ${countDown} 秒...`;
+            messageElement.innerText = `wait ${countDown} seconds...`;
 
             clearInterval(countDownInterval); // 清除之前的倒计时定时器
             countDownInterval = setInterval(() => {
                 countDown -= 1;
-                messageElement.innerText = `请等待 ${countDown} 秒...`;
+                messageElement.innerText = `wait ${countDown} seconds...`;
 
                 if (countDown <= 0) {
                     clearInterval(countDownInterval);
@@ -78,7 +78,7 @@
 
         // 定义下单成功时执行的函数
         function orderSuccess() {
-            document.getElementById('message').innerText = '下单成功！';
+            document.getElementById('message').innerText = 'order successful';
         }
 
         // 使用防抖函数包装倒计时函数

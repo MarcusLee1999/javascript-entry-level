@@ -27,7 +27,7 @@
 
 <body>
     <div id="app">
-        <button id="orderButton">下单</button>
+        <button id="orderButton">submit order</button>
         <p id="message"></p>
     </div>
 
@@ -38,7 +38,7 @@
 
         const messageElement = document.getElementById('message');
         let n = 0;
-        messageElement.innerText = `下单 ${n} 个`;
+        messageElement.innerText = `the number of order: ${n} `;
 
         function throttle(func) {
             let inThrottle = true;
@@ -58,7 +58,7 @@
 
         function placeOrder() {
             n++; // 增加点击次数
-            messageElement.innerText = `下单 ${n} 个`;
+            messageElement.innerText = `the number of order:  ${n} `;
 
         }
 
