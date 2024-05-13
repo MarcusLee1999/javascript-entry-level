@@ -45,7 +45,7 @@
 
     <script>
         // JavaScript代码开始
-        let countDownInterval; // 定义一个变量用于存储倒计时的定时器
+        let countDownInterval01; // 定义一个变量用于存储倒计时的定时器
         let debounce5000Timer; //5000ms的倒计时防抖定时器
 
         // 定义防抖函数
@@ -62,16 +62,16 @@
         // 定义倒计时显示的函数
         function startCountDown() {
             const messageElement = document.getElementById('message');
-            let countDown = 5; // 设置初始倒计时
-            messageElement.innerText = `wait ${countDown} seconds...`;
+            let countDown5s = 5; // 设置初始倒计时
+            messageElement.innerText = `wait ${countDown5s} seconds...`;
 
-            clearInterval(countDownInterval); // 清除之前的倒计时定时器
-            countDownInterval = setInterval(() => {
-                countDown -= 1;
-                messageElement.innerText = `wait ${countDown} seconds...`;
+            clearInterval(countDownInterval01); // 清除之前的倒计时定时器
+            countDownInterval01 = setInterval(() => {
+                countDown5s -= 1;
+                messageElement.innerText = `wait ${countDown5s} seconds...`;
 
-                if (countDown <= 0) {
-                    clearInterval(countDownInterval);
+                if (countDown5s <= 0) {
+                    clearInterval(countDownInterval01);
                 }
             }, 1000);
         }
